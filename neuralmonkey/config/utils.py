@@ -28,6 +28,10 @@ def adam_optimizer(learning_rate: float = 1e-4) -> tf.train.AdamOptimizer:
     return tf.train.AdamOptimizer(learning_rate)
 
 
+def lazy_adam_optimizer(learning_rate: float = 1e-4) -> tf.train.AdamOptimizer:
+    return tf.contrib.opt.LazyAdamOptimizer(learning_rate)
+
+
 def adadelta_optimizer(**kwargs) -> tf.train.AdadeltaOptimizer:
     return tf.train.AdadeltaOptimizer(**kwargs)
 

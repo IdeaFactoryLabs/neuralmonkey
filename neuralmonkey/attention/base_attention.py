@@ -83,10 +83,9 @@ def get_attention_mask(encoder: Attendable) -> Optional[tf.Tensor]:
         if encoder.spatial_mask is None:
             return None
 
-        # pylint: disable=no-member
-        shape = [s.value for s in encoder.spatial_mask.get_shape()[1:]]
-        # pylint: enable=no-member
-        return tf.reshape(encoder.spatial_mask, [-1, shape[0] * shape[1]])
+        mask_shape = tf.shape(encoder.spatial_mask)
+        return tf.reshape(encoder.spatial_mask,
+                          [mask_shape[0], mask_shape[1] * mask_shape[2]])
     else:
         raise AssertionError("Unknown encoder type")
 
